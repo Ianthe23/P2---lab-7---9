@@ -1,5 +1,5 @@
 # P2---lab-7---9
-# Aplicatie pentru FP pentru facultate
+# Aplicatie pentru FP cu clase pentru facultate
 #
 # Scrieți o aplicație pentru gestiunea notelor și a problemelor de laborator pentru o disciplină. 
 # Aplicația gestionează:
