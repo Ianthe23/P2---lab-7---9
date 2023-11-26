@@ -3,7 +3,7 @@
 #
 # Scrieți o aplicație pentru gestiunea notelor și a problemelor de laborator pentru o disciplină. 
 # Aplicația gestionează:
-# - studenți: <studentID>,<nume>,<grup> 
+# - studenți: <studentID>, <nume>, <grup> 
 # - problemă laborator: <număr laborator_număr problemă>,<descriere>, <deadline>
 # Creați o aplicație care permite:
 # - gestiunea listei de studenți și probleme de laborator.
