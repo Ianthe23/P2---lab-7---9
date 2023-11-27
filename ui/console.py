@@ -43,7 +43,8 @@ def printMeniu():
     print("   H) modificati nota unui student de la o anumita problema;")
     print("-----------------------------------------------------------")
     print("   I) creeati un raport pentru notele studentilor;")
-    print("   J) creeati un raport pentru notele mai mici decat 5 ale studentilor;")
+    print("   J) creeati un raport pentru mediile mai mici decat 5 ale studentilor;")
+    print("   K) creeati un raport cu notele primilor 30% studenti ordonati dupa nota;")
     print("   X) iesiti din aplicatie.\n")
 
 
@@ -268,7 +269,7 @@ class console:
             lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
 
         #ordonam dupa nume lista
-        lista_completa_sortata = sorted_list_of_lists = sorted(lista_completa, key=lambda x: x[1])
+        lista_completa_sortata = sorted(lista_completa, key=lambda x: x[1])
 
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind notele studentilor ordonate dupa nume" + "\033[0m"
@@ -298,7 +299,7 @@ class console:
             lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
 
         #ordonam dupa nume lista
-        lista_completa_sortata = sorted_list_of_lists = sorted(lista_completa, key=lambda x: x[3])
+        lista_completa_sortata = sorted(lista_completa, key=lambda x: x[3])
 
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind notele studentilor ordonate crescator" + "\033[0m"
@@ -325,25 +326,71 @@ class console:
         #creeam lista completa cu numele studentilor
         for index in range(len(lista_note)):
             student = self.__srv1.search_id(lista_note[index][0])
-            if lista_note[index][2] < 5:
-                lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
-
+            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
+        
+        lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[0], x[2]))
+        lista_medie = []
+        medie = 0
+        ct = 1
+        index = 0
+        while(index != len(lista_completa_sortata) - 1):
+            if lista_completa_sortata[index][0] == lista_completa_sortata[index + 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index + 1][2]):
+                medie += lista_completa_sortata[index][3]
+                ct += 1
+            else:
+                medie += lista_completa_sortata[index][3]
+                lista_medie.append([lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
+                medie = 0
+                ct = 1
+            index += 1
+        if lista_completa_sortata[index][0] == lista_completa_sortata[index - 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index - 1][2]):
+            medie += lista_completa_sortata[index][3]
+            lista_medie.append([lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
+        else:
+            lista_medie.append([lista_completa_sortata[index][1], lista_completa_sortata[index][3], int(lista_completa_sortata[index][2])])
+    
         #afisam raportul
-        underlined_string = "   "+ "\033[4m" + "Raport privind notele studentilor mai mici decat 5" + "\033[0m"
+        underlined_string = "   "+ "\033[4m" + "Raport privind mediile studentilor mai mici decat 5" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
         print("\n")
-        for elem in lista_completa:
+        for elem in lista_medie:
+            if elem[1] < 5:  
+                print(colored("nume:", "blue"), end = " ")
+                print(elem[0], end = "  ")
+                print(colored("medie:", "green"), end = " ")
+                print(elem[1], end = "  ")
+                print(colored("laborator:", "red"), end = " ")
+                print(elem[2])
+
+            
+
+    def __raport_primii_10_studenti(self):
+        lista_note = self.__srv3.get_note()
+        lista_completa = []
+        
+        #creeam lista completa cu numele studentilor
+        for index in range(len(lista_note)):
+            student = self.__srv1.search_id(lista_note[index][0])
+            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
+        
+        lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[3], x[1]))
+        
+
+        underlined_string = "   "+ "\033[4m" + "Raport privind notele primilor 30% studenti ordonati dupa nota" + "\033[0m"
+        print("\n")
+        print(colored(underlined_string, "yellow"))
+        print("\n")
+        for index in range(int(len(lista_completa_sortata) / 3)):
             print(colored("id:", "blue"), end = " ")
-            print(elem[0], end = "  ")
+            print(lista_completa_sortata[index][0], end = "  ")
             print(colored("nume:", "green"), end = " ")
-            print(elem[1], end = "  ")
+            print(lista_completa_sortata[index][1], end = "  ")
             print(colored("nr lab si nr pb:", "red"), end = " ")
-            print(elem[2], end = "  ")
+            print(lista_completa_sortata[index][2], end = "  ")
             print(colored("nota:", "magenta"), end = " ")
-            print(elem[3])
-
-
+            print(lista_completa_sortata[index][3])
+            
     def __show_all_note(self):
         return self.__srv3.get_note()
 
@@ -429,9 +476,12 @@ class console:
                         self.__raport_crescator_nota()
                     else:
                         print("Comanda invalida!\n")
-                    
+
                 elif optiune == 'J':
                     self.__raport_nota_mai_mica_de_5()
+                    
+                elif optiune == 'K':
+                    self.__raport_primii_10_studenti()
                 else:
                     print("Comanda invalida!\n")
                 

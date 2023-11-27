@@ -32,8 +32,8 @@ class NotaValidator:
             erori.append("Id-ul studentului nu poate fi negativ!")
         if not verificare_float(note.get_id_problema()):
             erori.append("Nr lab si nr pb trebuie sa fie rational!")
-        if note.get_nota() < 0:
-            erori.append("Nota nu poate fi negativa!")
+        if note.get_nota() < 0 or note.get_nota() > 10:
+            erori.append("Nota nu poate fi negativa sau peste 10!")
         if len(erori) > 0:
             raise ValueError(erori)
         
