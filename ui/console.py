@@ -342,16 +342,16 @@ class console:
                 ct += 1
             else:
                 medie += lista_completa_sortata[index][3]
-                lista_medie.append([lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
+                lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
                 medie = 0
                 ct = 1
             index += 1
         #verificam daca ultimul student are acelasi id si laborator cu cel de dinainte
         if lista_completa_sortata[index][0] == lista_completa_sortata[index - 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index - 1][2]):
             medie += lista_completa_sortata[index][3]
-            lista_medie.append([lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
+            lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
         else:
-            lista_medie.append([lista_completa_sortata[index][1], lista_completa_sortata[index][3], int(lista_completa_sortata[index][2])])
+            lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], lista_completa_sortata[index][3], int(lista_completa_sortata[index][2])])
     
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind mediile studentilor mai mici decat 5" + "\033[0m"
@@ -359,13 +359,15 @@ class console:
         print(colored(underlined_string, "yellow"))
         print("\n")
         for elem in lista_medie:
-            if elem[1] < 5:  
-                print(colored("nume:", "blue"), end = " ")
+            if elem[2] < 5:  
+                print(colored("id:", "blue"), end = " ")
                 print(elem[0], end = "  ")
-                print(colored("medie:", "green"), end = " ")
+                print(colored("nume:", "green"), end = " ")
                 print(elem[1], end = "  ")
-                print(colored("laborator:", "red"), end = " ")
-                print(elem[2])
+                print(colored("medie:", "red"), end = " ")
+                print(elem[2], end = "  ")
+                print(colored("laborator:", "magenta"), end = " ")
+                print(elem[3])
 
             
 
@@ -486,7 +488,7 @@ class console:
                     self.__raport_nota_mai_mica_de_5()
                     
                 elif optiune == 'K':
-                    self.__raport_primii_10_studenti()
+                    self.__raport_primii_30_studenti()
                 else:
                     print("Comanda invalida!\n")
                 
