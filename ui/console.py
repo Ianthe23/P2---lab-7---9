@@ -328,11 +328,14 @@ class console:
             student = self.__srv1.search_id(lista_note[index][0])
             lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
         
+        #sortam lista completa dupa id-ul acestora
         lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[0], x[2]))
         lista_medie = []
         medie = 0
         ct = 1
         index = 0
+
+        #calculam media pe fiecare laborator al fiecarui student
         while(index != len(lista_completa_sortata) - 1):
             if lista_completa_sortata[index][0] == lista_completa_sortata[index + 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index + 1][2]):
                 medie += lista_completa_sortata[index][3]
@@ -343,6 +346,7 @@ class console:
                 medie = 0
                 ct = 1
             index += 1
+        #verificam daca ultimul student are acelasi id si laborator cu cel de dinainte
         if lista_completa_sortata[index][0] == lista_completa_sortata[index - 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index - 1][2]):
             medie += lista_completa_sortata[index][3]
             lista_medie.append([lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
@@ -365,7 +369,7 @@ class console:
 
             
 
-    def __raport_primii_10_studenti(self):
+    def __raport_primii_30_studenti(self):
         lista_note = self.__srv3.get_note()
         lista_completa = []
         
@@ -374,9 +378,10 @@ class console:
             student = self.__srv1.search_id(lista_note[index][0])
             lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
         
+        #ordonez lista dupa nota si dupa aceea dupa nume
         lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[3], x[1]))
         
-
+        #afisez raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind notele primilor 30% studenti ordonati dupa nota" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
