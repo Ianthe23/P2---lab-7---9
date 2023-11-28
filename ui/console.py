@@ -62,11 +62,10 @@ class console:
         """
             Adaugam un student nou
         """
-        student_id = int(input("Introduceti id-ul studentului: "))
-        nume = input("Introduceti numele studentului: ")
-        grup = int(input("Introduceti grupul studentului: "))
-
         try:
+            student_id = int(input("Introduceti id-ul studentului: "))
+            nume = input("Introduceti numele studentului: ")
+            grup = int(input("Introduceti grupul studentului: "))
             student = self.__srv1.add_student(student_id, nume, grup)
         except ValueError as ve:
             print(ve)
@@ -131,11 +130,10 @@ class console:
         """
             Adaugam o problema noua
         """
-        nrlab_nrpb = float(input("Introduceti nr. lab. si nr. pb.: "))
-        descriere = input("Introduceti descrierea problemei: ")
-        deadline = input("Introduceti deadline-ul problemei: ")
-
         try:
+            nrlab_nrpb = float(input("Introduceti nr. lab. si nr. pb.: "))
+            descriere = input("Introduceti descrierea problemei: ")
+            deadline = input("Introduceti deadline-ul problemei: ")
             problema = self.__srv2.add_problema(nrlab_nrpb, descriere, deadline)
         except ValueError as ve:
             print(ve)

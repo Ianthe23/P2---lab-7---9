@@ -18,7 +18,7 @@ class NoteService():
         """
         nota = note(id1, id2, nota_data)
         self.__validator.valideaza_nota(nota)
-        self.__repo.adauga_nota(id1, id2, nota_data)
+        self.__repo.adauga_nota(nota)
         return nota
 
     def delete_nota(self, id1, id2):

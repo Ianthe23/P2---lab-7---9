@@ -77,7 +77,7 @@ class probleme:
     def __eq__(self, other):
         return self.__nrlab_nrpb == other.__nrlab_nrpb and self.__descriere == other.__descriere and self.__deadline == other.__deadline
     def __str__(self):
-        return colored("nrlab si pb: ", "blue") + str(self.__nrlab_nrpb) + "; descriere: " + str(self.__descriere) + "; deadline: " + str(self.__deadline) + colored("; ", "red")
+        return colored("nrlab si pb: ", "green") + str(self.__nrlab_nrpb) + "; descriere: " + str(self.__descriere) + "; deadline: " + str(self.__deadline) + colored("; ", "red")
     def __repr__(self):
         return str(self)
 
@@ -106,6 +106,6 @@ class note:
     def __eq__(self, other):
         return self.__id_student == other.__id_student and self.__id_problema == other.__id_problema and self.__nota == other.__nota
     def __str__(self):
-        return colored("id student: ", "blue") + str(self.__id_student) + "; " + colored(" id problema: ", "blue")  + str(self.__id_problema) + "; nota: " + str(self.__nota) + colored("; ", "red")
+        return colored("id student: ", "blue") + str(self.__id_student) + "; " + colored(" id problema: ", "green")  + str(self.__id_problema) + "; nota: " + str(self.__nota) + colored("; ", "red")
     def __repr__(self):
         return str(self)
