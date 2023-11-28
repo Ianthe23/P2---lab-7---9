@@ -10,7 +10,7 @@ from ui.console import console
 
 Student = StudentService(OperatiiStudenti(), StudentValidator())
 Problema = ProblemaService(OperatiiProbleme(), ProblemaValidator())
-Note = NoteService(OperatiiNote(), NotaValidator())
+Note = NoteService(OperatiiNote(), NotaValidator(), Student)
 
 ui = console(Student, Problema, Note)
 

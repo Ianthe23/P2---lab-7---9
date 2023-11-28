@@ -258,23 +258,14 @@ class console:
         """
             Generam raportul ordonat crescator
         """
-        lista_note = self.__srv3.get_note()
-        lista_completa = []
         
-        #creeam lista completa cu numele studentilor
-        for index in range(len(lista_note)):
-            student = self.__srv1.search_id(lista_note[index][0])
-            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
-
-        #ordonam dupa nume lista
-        lista_completa_sortata = sorted(lista_completa, key=lambda x: x[1])
-
+        lista = self.__srv3.raport_crescator_nume()
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind notele studentilor ordonate dupa nume" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
         print("\n")
-        for elem in lista_completa_sortata:
+        for elem in lista:
             print(colored("id:", "blue"), end = " ")
             print(elem[0], end = "  ")
             print(colored("nume:", "green"), end = " ")
@@ -288,23 +279,14 @@ class console:
         """
             Generam raportul ordonat crescator
         """
-        lista_note = self.__srv3.get_note()
-        lista_completa = []
-        
-        #creeam lista completa cu numele studentilor
-        for index in range(len(lista_note)):
-            student = self.__srv1.search_id(lista_note[index][0])
-            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
-
-        #ordonam dupa nume lista
-        lista_completa_sortata = sorted(lista_completa, key=lambda x: x[3])
+        lista = self.__srv3.raport_crescator_nota()
 
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind notele studentilor ordonate crescator" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
         print("\n")
-        for elem in lista_completa_sortata:
+        for elem in lista:
             print(colored("id:", "blue"), end = " ")
             print(elem[0], end = "  ")
             print(colored("nume:", "green"), end = " ")
@@ -318,56 +300,21 @@ class console:
         """
             Generam raportul ordonat crescator
         """
-        lista_note = self.__srv3.get_note()
-        lista_completa = []
-        
-        #creeam lista completa cu numele studentilor
-        for index in range(len(lista_note)):
-            student = self.__srv1.search_id(lista_note[index][0])
-            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
-        
-        #sortam lista completa dupa id-ul acestora
-        lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[0], x[2]))
-        lista_medie = []
-        medie = 0
-        ct = 1
-        index = 0
-
-        #calculam media pe fiecare laborator al fiecarui student
-        while(index != len(lista_completa_sortata) - 1):
-            if lista_completa_sortata[index][0] == lista_completa_sortata[index + 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index + 1][2]):
-                medie += lista_completa_sortata[index][3]
-                ct += 1
-            else:
-                medie += lista_completa_sortata[index][3]
-                lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
-                medie = 0
-                ct = 1
-            index += 1
-        #verificam daca ultimul student are acelasi id si laborator cu cel de dinainte
-        if lista_completa_sortata[index][0] == lista_completa_sortata[index - 1][0] and int(lista_completa_sortata[index][2]) == int(lista_completa_sortata[index - 1][2]):
-            medie += lista_completa_sortata[index][3]
-            lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], medie / ct, int(lista_completa_sortata[index][2])])
-        else:
-            lista_medie.append([lista_completa_sortata[index][0], lista_completa_sortata[index][1], lista_completa_sortata[index][3], int(lista_completa_sortata[index][2])])
+        lista = self.__srv3.raport_medie_mai_mica_decat_5()
     
         #afisam raportul
         underlined_string = "   "+ "\033[4m" + "Raport privind mediile studentilor mai mici decat 5" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
         print("\n")
-        for elem in lista_medie:
-            if elem[2] < 5:  
-                print(colored("id:", "blue"), end = " ")
-                print(elem[0], end = "  ")
-                print(colored("nume:", "green"), end = " ")
+        for elem in lista:
+            if elem[4] < 5:  
+                print(colored("nume:", "blue"), end = " ")
                 print(elem[1], end = "  ")
-                print(colored("medie:", "red"), end = " ")
-                print(elem[2], end = "  ")
-                print(colored("laborator:", "magenta"), end = " ")
+                print(colored("laborator:", "green"), end = " ")
+                print(int(elem[2]), end = "  ")
+                print(colored("nota:", "red"), end = " ")
                 print(elem[3])
-
-            
 
     def __raport_primii_30_studenti(self):
         lista_note = self.__srv3.get_note()
