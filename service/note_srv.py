@@ -84,6 +84,13 @@ class NoteService():
             raport_sortat[index].extend([raport_sortat[index][3]])
         return raport_sortat
 
+    def raport_primii_10_studenti(self):
+        raport = self.creeare_raport()
+
+        raport_sortat = sorted(raport, key = lambda x: (x[3], x[1]))
+        return raport_sortat
+
+
     def get_note(self):
         """
             Returnam toate notele
