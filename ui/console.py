@@ -153,6 +153,9 @@ class console:
             print(ve)
 
     def __modify_problema(self):
+        """
+            Modificam o problema dupa id
+        """
         try:
             nrlab_nrpb = float(input("Introduceti nr.lab si nr. pb. de modificat: "))
             problema = self.__srv2.search_nrlab_nrpb(nrlab_nrpb)
@@ -317,31 +320,24 @@ class console:
                 print(elem[3])
 
     def __raport_primii_30_studenti(self):
-        lista_note = self.__srv3.get_note()
-        lista_completa = []
-        
-        #creeam lista completa cu numele studentilor
-        for index in range(len(lista_note)):
-            student = self.__srv1.search_id(lista_note[index][0])
-            lista_completa.append([lista_note[index][0], student.get_nume(), lista_note[index][1], lista_note[index][2]])
-        
-        #ordonez lista dupa nota si dupa aceea dupa nume
-        lista_completa_sortata = sorted(lista_completa, key=lambda x: (x[3], x[1]))
-        
+        """
+            Creeam raportul pentru primii 10% studenti ordonati crescator dupa nota si dupa aceea dupa nume
+        """
+        lista = self.__srv3.raport_primii_10_studenti()
         #afisez raportul
-        underlined_string = "   "+ "\033[4m" + "Raport privind notele primilor 30% studenti ordonati dupa nota" + "\033[0m"
+        underlined_string = "   "+ "\033[4m" + "Raport privind notele primilor 10% studenti ordonati dupa nota" + "\033[0m"
         print("\n")
         print(colored(underlined_string, "yellow"))
         print("\n")
-        for index in range(int(len(lista_completa_sortata) / 3)):
+        for index in range(int(len(lista) / 10)):
             print(colored("id:", "blue"), end = " ")
-            print(lista_completa_sortata[index][0], end = "  ")
+            print(lista[index][0], end = "  ")
             print(colored("nume:", "green"), end = " ")
-            print(lista_completa_sortata[index][1], end = "  ")
+            print(lista[index][1], end = "  ")
             print(colored("nr lab si nr pb:", "red"), end = " ")
-            print(lista_completa_sortata[index][2], end = "  ")
+            print(lista[index][2], end = "  ")
             print(colored("nota:", "magenta"), end = " ")
-            print(lista_completa_sortata[index][3])
+            print(lista[index][3])
             
     def __show_all_note(self):
         return self.__srv3.get_note()

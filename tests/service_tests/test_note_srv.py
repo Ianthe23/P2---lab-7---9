@@ -98,6 +98,23 @@ class TestNoteService(unittest.TestCase):
 
         self.assertEqual(self.__note_srv.raport_medie_mai_mica_decat_5(), [[317, "Alexe Andrei", 1.1, 10, 8], [317, "Alexe Andrei", 1.2, 6, 8], [318, "Achim Eduard", 1.2, 9, 9]])
 
+    def test_raport_primii_10_studenti(self):
+        student1 = self.__studenti_srv.add_student(317, "Alexe Andrei", 1)
+        student2 = self.__studenti_srv.add_student(318, "Achim Eduard", 2)
+
+        self.assertEqual(len(self.__studenti_srv.get_studenti()), 2)
+
+        nota1 = self.__note_srv.add_nota(317, 1.1, 10)
+        nota2 = self.__note_srv.add_nota(318, 1.2, 9)
+        nota3 = self.__note_srv.add_nota(317, 1.2, 9)
+
+        self.assertEqual(self.__note_srv.raport_primii_10_studenti(), [[318, "Achim Eduard", 1.2, 9], [317, "Alexe Andrei", 1.2, 9], [317, "Alexe Andrei", 1.1, 10]])
+
+        nota4 = self.__note_srv.add_nota(318, 1.1, 8)
+
+        self.assertEqual(self.__note_srv.raport_primii_10_studenti(), [[318, "Achim Eduard", 1.1, 8], [318, "Achim Eduard", 1.2, 9], [317, "Alexe Andrei", 1.2, 9], [317, "Alexe Andrei", 1.1, 10]])
+
+
     def test_get_note(self):
         nota1 = self.__note_srv.add_nota(317, 1.1, 10)
         nota2 = self.__note_srv.add_nota(317, 1.2, 8)
