@@ -1,7 +1,7 @@
 import unittest
 
 from domain.entitati import probleme
-from repository.probleme_repo import OperatiiProbleme, cautaProblema, adaugareValida
+from repository.probleme_repo import OperatiiProbleme, OperatiiProblemeFile, cautaProblema, adaugareValida
 
 class TestOperatiiProbleme(unittest.TestCase):
     def setUp(self) -> None:
@@ -62,6 +62,24 @@ class TestOperatiiProbleme(unittest.TestCase):
         
         self.__repo.adauga_problema(problema)
         self.assertEqual(self.__repo.returneaza_probleme(), [problema])
+
+class TestOperatiiProblemeFile(unittest.TestCase):
+    def setUp(self) -> None:
+        self.__repo = OperatiiProblemeFile("test_probleme.txt")
+
+    def test_create_file_Repo(self):
+        init_len = len(self.__repo.returnare_probleme())
+        problema = probleme(1.1, "verif inj", "01/01/2023")
+        self.__repo.adaugare_problema(problema)
+
+        self.assertEqual(len(self.__repo.returnare_probleme()), init_len + 1)
+
+    def test_modify_fileRepo(self):
+        init_len = len(self.__repo.returnare_probleme())
+        problema = probleme(1.2, "verif bij", "01/01/2023")
+
+        self.__repo.adaugare_problema(problema)
+        self.__repo.modificare_problema(1.2, "verif surj", "02/01/2023")
 
 if __name__ == '__main__':
     unittest.main()

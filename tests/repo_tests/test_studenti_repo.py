@@ -1,5 +1,5 @@
 from domain.entitati import studenti
-from repository.studenti_repo import OperatiiStudenti, cautaStudent, adaugareValida
+from repository.studenti_repo import OperatiiStudenti, OperatiiStudentiFile, cautaStudent, adaugareValida
 import unittest
 
 class TestOperatiiStudenti(unittest.TestCase):
@@ -64,6 +64,25 @@ class TestOperatiiStudenti(unittest.TestCase):
         self.__repo.adauga_student(student)
 
         self.assertEqual(self.__repo.returneaza_studenti(), [student])
+
+class TestOperatiiStudentiFile(unittest.TestCase):
+    def setUp(self) -> None:
+        self.__repo = OperatiiStudentiFile("test_studenti.txt")
+
+    def test_create_file_Repo(self):
+        init_len = len(self.__repo.returnare_studenti())
+        student = studenti(317, "Alexe Andrei", 1)
+        self.__repo.adaugare_student(student)
+
+        self.assertEqual(len(self.__repo.returnare_studenti()), init_len + 1)
+
+    def test_modify_fileRepo(self):
+        init_len = len(self.__repo.returnare_studenti())
+        student = studenti(320, "Alexe Andrei", 1)
+
+        self.__repo.adaugare_student(student)
+        self.__repo.modificare_student(320, "Alexe Maria", 2)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,5 @@
+1.1, verif inj, 01/01/2023
+1.2, verif surj, 02/02/2023
+2.1, verif bij, 03/03/2023
+2.2, calc raza, 05/05/2023
+3.1, verif egalitatea, 06/06/2023
