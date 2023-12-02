@@ -1,4 +1,4 @@
-from domain.entitati import probleme
+from domain.entitati import Probleme
 from domain.validatori import ProblemaValidator
 from repository.probleme_repo import OperatiiProbleme, OperatiiProblemeFile
 from utils.functions import string_generator, data_generator
@@ -15,7 +15,7 @@ class ProblemaService:
         """
             Inseram o problema noua in repo
         """
-        problema = probleme(nrlab_nrpb, descriere, deadline)
+        problema = Probleme(nrlab_nrpb, descriere, deadline)
         self.__validator.valideaza_problema(problema)
         self.__repo.adauga_problema(problema)
         return problema
@@ -30,7 +30,7 @@ class ProblemaService:
         """
             Modificam problema identificata dupa nrlab si nrpb
         """
-        problema = probleme(nrlab_nrpb, descriere_noua, deadline_nou)
+        problema = Probleme(nrlab_nrpb, descriere_noua, deadline_nou)
         self.__validator.valideaza_problema(problema)
         self.__repo.modifica_problema(nrlab_nrpb, descriere_noua, deadline_nou)
         return problema
@@ -53,6 +53,6 @@ class ProblemaService:
             Adaugam random probleme
         """
         for index in range(nr):
-            problema = probleme(uniform(1.0, 10.0), string_generator(11), data_generator())
+            problema = Probleme(uniform(1.0, 10.0), string_generator(11), data_generator())
             self.__validator.valideaza_problema(problema)
             self.__repo.adauga_problema(problema)

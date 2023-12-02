@@ -1,6 +1,6 @@
 import unittest
 
-from domain.entitati import studenti
+from domain.entitati import Studenti
 from domain.validatori import StudentValidator
 from repository.studenti_repo import OperatiiStudenti
 from service.studenti_srv import StudentService

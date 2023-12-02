@@ -1,4 +1,4 @@
-from domain.entitati import studenti
+from domain.entitati import Studenti
 import os
 
 def cautaStudent(lista, id, n):
@@ -26,7 +26,7 @@ class OperatiiStudenti:
         """
             Adaugam un nou student
         """
-        student = studenti(nou_student.get_studentID(), nou_student.get_nume(), nou_student.get_grup())
+        student = Studenti(nou_student.get_studentID(), nou_student.get_nume(), nou_student.get_grup())
         if len(self.__studenti) > 0:
             if adaugareValida(self.__studenti, student.get_studentID(), len(self.__studenti)):
                 self.__studenti.append(student)
@@ -92,7 +92,7 @@ class OperatiiStudentiFile(OperatiiStudenti):
                 if line == "\n":
                     break
                 student_ID, nume, grup = [elem.strip() for elem in line.split(", ")]
-                student = studenti(student_ID, nume, grup)
+                student = Studenti(student_ID, nume, grup)
                 OperatiiStudenti.adauga_student(self, student)
 
     def __save_in_file(self):

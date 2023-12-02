@@ -1,4 +1,4 @@
-from domain.entitati import studenti, probleme, note
+from domain.entitati import Studenti, Probleme, Note
 from repository.studenti_repo import OperatiiStudenti
 from repository.probleme_repo import OperatiiProbleme
 import os
@@ -23,7 +23,7 @@ class OperatiiNote():
             Functia adauga nota pentru studentul cu id-ul id1 si
             pentru laboratorul cu nr lab si nr pb id2
         """
-        nota_noua = note(nota.get_id_student(), nota.get_id_problema(), nota.get_nota())
+        nota_noua = Note(nota.get_id_student(), nota.get_id_problema(), nota.get_nota())
 
         if not len(self.__note):
             self.__note.append(nota_noua)
@@ -84,7 +84,7 @@ class OperatiiNoteFile(OperatiiNote):
                 if line == "\n":
                     break
                 id_student, id_nrlab_nrpb, nota = [elem.strip() for elem in line.split(", ")]
-                Nota = note(id_student, id_nrlab_nrpb, nota)
+                Nota = Note(id_student, id_nrlab_nrpb, nota)
                 OperatiiNote.adauga_nota(self, Nota)
 
     def __save_in_file(self):

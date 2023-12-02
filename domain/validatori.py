@@ -1,4 +1,4 @@
-from domain.entitati import studenti, probleme
+from domain.entitati import Studenti, Probleme
 from utils.functions import verificare_float, validare_data
 
 class StudentValidator: 

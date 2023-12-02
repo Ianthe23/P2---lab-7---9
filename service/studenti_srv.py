@@ -1,4 +1,4 @@
-from domain.entitati import studenti
+from domain.entitati import Studenti
 from repository.studenti_repo import OperatiiStudenti, OperatiiStudentiFile
 from domain.validatori import StudentValidator
 from utils.functions import string_generator, number_string_generator
@@ -15,7 +15,7 @@ class StudentService:
         """
             Functia incearca sa introduca studentul in memorie
         """
-        student = studenti(id, nume, grup)
+        student = Studenti(id, nume, grup)
         self.__validator.valideaza_studentul(student)
         self.__repo.adauga_student(student)
         return student
@@ -30,7 +30,7 @@ class StudentService:
         """
             Modifica studentul mentionat
         """
-        student = studenti(id, nume_nou, grup_nou)
+        student = Studenti(id, nume_nou, grup_nou)
         self.__validator.valideaza_studentul(student)
         self.__repo.modifica_student(id, nume_nou, grup_nou)
         return student
@@ -53,6 +53,6 @@ class StudentService:
             Adaugam studenti random in repo
         """
         for index in range(nr):
-            student = studenti(random.randint(1, 100000), string_generator(11), number_string_generator(10))
+            student = Studenti(random.randint(1, 100000), string_generator(11), number_string_generator(10))
             self.__validator.valideaza_studentul(student)
             self.__repo.adauga_student(student)

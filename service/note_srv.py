@@ -1,4 +1,4 @@
-from domain.entitati import note
+from domain.entitati import Note
 from domain.validatori import NotaValidator
 from repository.studenti_repo import OperatiiStudenti
 from repository.probleme_repo import OperatiiProbleme
@@ -18,7 +18,7 @@ class NoteService:
         """
             Adaugam o nota unui student pe o problema
         """
-        nota = note(id1, id2, nota_data)
+        nota = Note(id1, id2, nota_data)
         self.__validator.valideaza_nota(nota)
         self.__repo.adauga_nota(nota)
         return nota
@@ -30,7 +30,7 @@ class NoteService:
         self.__repo.sterge_nota(id1, id2)
 
     def modify_nota(self, id1, id2, nota_noua):
-        notaNoua = note(id1, id2, nota_noua)
+        notaNoua = Note(id1, id2, nota_noua)
         self.__validator.valideaza_nota(notaNoua)
         self.__repo.modifica_nota(id1, id2, nota_noua)
         return notaNoua

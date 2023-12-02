@@ -1,6 +1,6 @@
 import unittest
 
-from domain.entitati import note, studenti
+from domain.entitati import Note, Studenti
 from domain.validatori import NotaValidator, StudentValidator
 from repository.note_repo import OperatiiNote, OperatiiNoteFile
 from repository.studenti_repo import OperatiiStudenti, OperatiiStudentiFile

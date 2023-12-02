@@ -1,6 +1,6 @@
 import unittest
 
-from domain.entitati import probleme
+from domain.entitati import Probleme
 from domain.validatori import ProblemaValidator
 from repository.probleme_repo import OperatiiProbleme
 from service.probleme_srv import ProblemaService

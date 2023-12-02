@@ -10,7 +10,7 @@ def reset_lista():
     """
     return []
 
-class studenti:
+class Studenti:
     def __init__(self, studentID, nume, grup):
         """
             Construim clasa cu datele necesare studentilor
@@ -46,7 +46,7 @@ class studenti:
     def __repr__(self):
         return str(self)
 
-class probleme:
+class Probleme:
     def __init__(self, nrlab_nrpb, descriere, deadline):
         """
             Creeam biblioteca necesara problemelor de laborator
@@ -81,7 +81,7 @@ class probleme:
     def __repr__(self):
         return str(self)
 
-class note:
+class Note:
     def __init__(self, id_student, id_problema, nota):
         self.__id_student = id_student
         self.__id_problema = id_problema

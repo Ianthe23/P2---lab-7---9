@@ -1,4 +1,4 @@
-from domain.entitati import probleme
+from domain.entitati import Probleme
 import os
 
 def cautaProblema(lista, id, n):
@@ -26,7 +26,7 @@ class OperatiiProbleme:
         """
             Adaugam o noua problema
         """
-        problema = probleme(noua_problema.get_nrlab_nrpb(), noua_problema.get_descriere(), noua_problema.get_deadline())
+        problema = Probleme(noua_problema.get_nrlab_nrpb(), noua_problema.get_descriere(), noua_problema.get_deadline())
         if len(self.__probleme) > 0:
             if adaugareValida(self.__probleme, problema.get_nrlab_nrpb(), len(self.__probleme)):
                 self.__probleme.append(problema)
@@ -94,7 +94,7 @@ class OperatiiProblemeFile(OperatiiProbleme):
                 if line == "\n":
                     break
                 nrlab_nrpb, descriere, deadline = [elem.strip() for elem in line.split(", ")]
-                problema = probleme(nrlab_nrpb, descriere, deadline)
+                problema = Probleme(nrlab_nrpb, descriere, deadline)
                 OperatiiProbleme.adauga_problema(self, problema)
 
     def __save_in_file(self):
