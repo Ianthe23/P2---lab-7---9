@@ -23,42 +23,42 @@ class TestOperatiiProbleme(unittest.TestCase):
         self.assertRaises(ValueError, self.__repo3.cauta_nrlab_nrpb, 1)
 
     def test_adauga_problema(self):
-        problema = probleme(1.1, "Dati exemplu de functie bijectiva", "01/01/2023")
+        problema = probleme(1.3, "Dati exemplu de functie bijectiva", "01/01/2023")
 
         self.__repo.adauga_problema(problema)
         self.assertEqual(len(self.__repo.returneaza_probleme()), 1)
 
     def test_sterge_problema(self):
-        problema = probleme(1.1, "Dati exemplu de functie bijectiva", "01/01/2023")
+        problema = probleme(1.4, "Dati exemplu de functie bijectiva", "01/01/2023")
 
         self.__repo.adauga_problema(problema)
-        self.__repo.sterge_problema(1.1)
+        self.__repo.sterge_problema(1.4)
         self.assertEqual(len(self.__repo.returneaza_probleme()), 0)
 
     def test_modifica_problema(self):
-        problema = probleme(1.1, "Dati exemplu de functie injectiva", "02/01/2023")
+        problema = probleme(1.5, "Dati exemplu de functie injectiva", "02/01/2023")
 
         self.__repo.adauga_problema(problema)
-        self.__repo.modifica_problema(1.1, "Dati exemplu de functie injectiva", "01/01/2023")
+        self.__repo.modifica_problema(1.5, "Dati exemplu de functie injectiva", "01/01/2023")
 
-        problema2 = probleme(1.1, "Dati exemplu de functie injectiva", "01/01/2023")
+        problema2 = probleme(1.5, "Dati exemplu de functie injectiva", "01/01/2023")
 
         self.__new_repo.adauga_problema(problema2)
         self.assertEqual(self.__repo, self.__new_repo)
 
     def test_cauta_nrlab_nrpb(self):
-        problema1 = probleme(1.1, "Dati exemplu de functie injectiva", "01/01/2023")
-        problema2 = probleme(1.2, "Dati exemplu de functie bijectiva", "02/01/2023")
+        problema1 = probleme(1.6, "Dati exemplu de functie injectiva", "01/01/2023")
+        problema2 = probleme(1.7, "Dati exemplu de functie bijectiva", "02/01/2023")
 
         self.__repo.adauga_problema(problema1)
         self.__repo.adauga_problema(problema2)
 
-        self.assertEqual(self.__repo.cauta_nrlab_nrpb(1.1), problema1)
-        self.assertEqual(self.__repo.cauta_nrlab_nrpb(1.2), problema2)
+        self.assertEqual(self.__repo.cauta_nrlab_nrpb(1.6), problema1)
+        self.assertEqual(self.__repo.cauta_nrlab_nrpb(1.7), problema2)
         self.assertRaises(ValueError, self.__repo.cauta_nrlab_nrpb, 1)
 
     def test_returneaza_probleme(self):
-        problema = probleme(1.1, "Dati exemplu de functie injectiva", "02/01/2023")
+        problema = probleme(1.8, "Dati exemplu de functie injectiva", "02/01/2023")
         
         self.__repo.adauga_problema(problema)
         self.assertEqual(self.__repo.returneaza_probleme(), [problema])
@@ -68,18 +68,18 @@ class TestOperatiiProblemeFile(unittest.TestCase):
         self.__repo = OperatiiProblemeFile("test_probleme.txt")
 
     def test_create_file_Repo(self):
-        init_len = len(self.__repo.returnare_probleme())
-        problema = probleme(1.1, "verif inj", "01/01/2023")
-        self.__repo.adaugare_problema(problema)
+        init_len = len(self.__repo.returneaza_probleme())
+        problema = probleme(2.1, "verif inj", "01/01/2023")
+        self.__repo.adauga_problema(problema)
 
-        self.assertEqual(len(self.__repo.returnare_probleme()), init_len + 1)
+        self.assertEqual(len(self.__repo.returneaza_probleme()), init_len + 1)
 
     def test_modify_fileRepo(self):
-        init_len = len(self.__repo.returnare_probleme())
-        problema = probleme(1.2, "verif bij", "01/01/2023")
+        init_len = len(self.__repo.returneaza_probleme())
+        problema = probleme(2.2, "verif bij", "01/01/2023")
 
-        self.__repo.adaugare_problema(problema)
-        self.__repo.modificare_problema(1.2, "verif surj", "02/01/2023")
+        self.__repo.adauga_problema(problema)
+        self.__repo.modifica_problema(2.2, "verif surj", "02/01/2023")
 
 if __name__ == '__main__':
     unittest.main()

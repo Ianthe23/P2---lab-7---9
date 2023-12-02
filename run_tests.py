@@ -1,9 +1,9 @@
 import unittest
 from tests.domain_tests.test_entitati import test_probleme, test_studenti, test_note
 from tests.domain_tests.test_validatori import SValidator, PValidator, NValidator
-from tests.repo_tests.test_probleme_repo import TestOperatiiProbleme
-from tests.repo_tests.test_studenti_repo import TestOperatiiStudenti
-from tests.repo_tests.test_note_repo import TestOperatiiNote
+from tests.repo_tests.test_probleme_repo import TestOperatiiProbleme, TestOperatiiProblemeFile
+from tests.repo_tests.test_studenti_repo import TestOperatiiStudenti, TestOperatiiStudentiFile
+from tests.repo_tests.test_note_repo import TestOperatiiNote, TestOperatiiNoteFile
 from tests.service_tests.test_probleme_srv import TestProblemaService
 from tests.service_tests.test_studenti_srv import TestStudentService
 from tests.service_tests.test_note_srv import TestNoteService
@@ -18,8 +18,11 @@ def suite():
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=PValidator))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=NValidator))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiProbleme))
+    test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiProblemeFile))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiStudenti))
+    test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiStudentiFile))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiNote))
+    test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestOperatiiNoteFile))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestProblemaService))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestStudentService))
     test_suite.addTest(unittest.TestLoader().loadTestsFromTestCase(testCaseClass=TestNoteService))

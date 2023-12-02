@@ -17,14 +17,14 @@ class StudentService:
         """
         student = studenti(id, nume, grup)
         self.__validator.valideaza_studentul(student)
-        self.__repo.adaugare_student(student)
+        self.__repo.adauga_student(student)
         return student
     
     def delete_student(self, id):
         """
             Functia incearca sa stearga studentul
         """
-        self.__repo.stergere_student(id)
+        self.__repo.sterge_student(id)
 
     def modify_student(self, id, nume_nou, grup_nou):
         """
@@ -32,21 +32,21 @@ class StudentService:
         """
         student = studenti(id, nume_nou, grup_nou)
         self.__validator.valideaza_studentul(student)
-        self.__repo.modificare_student(id, nume_nou, grup_nou)
+        self.__repo.modifica_student(id, nume_nou, grup_nou)
         return student
     
     def search_id(self, id):
         """
             Verificam daca exista student cu id-ul cautat 
         """
-        student = self.__repo.cautare_student(id)
+        student = self.__repo.cauta_ID(id)
         return student
     
     def get_studenti(self):
         """
             Returnam toti studentii din repo
         """
-        return self.__repo.returnare_studenti()
+        return self.__repo.returneaza_studenti()
     
     def add_random_studenti(self, nr):
         """
@@ -55,4 +55,4 @@ class StudentService:
         for index in range(nr):
             student = studenti(random.randint(1, 100000), string_generator(11), number_string_generator(10))
             self.__validator.valideaza_studentul(student)
-            self.__repo.adaugare_student(student)
+            self.__repo.adauga_student(student)

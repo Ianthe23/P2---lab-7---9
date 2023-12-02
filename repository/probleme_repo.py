@@ -39,7 +39,7 @@ class OperatiiProbleme:
         """
         noi_probleme = []
         for problema in self.__probleme:
-            if problema.get_nrlab_nrpb() != nrlab_nrpb:
+            if float(problema.get_nrlab_nrpb()) != nrlab_nrpb:
                 noi_probleme.append(problema)
         self.__probleme = noi_probleme
 
@@ -49,7 +49,7 @@ class OperatiiProbleme:
         """
         noi_probleme = []
         for problema in self.__probleme:
-            if problema.get_nrlab_nrpb() == nrlab_nrpb:
+            if float(problema.get_nrlab_nrpb()) == nrlab_nrpb:
                 problema.set_descriere(descriere_noua)
                 problema.set_deadline(deadline_nou)
             noi_probleme.append(problema)
@@ -107,34 +107,34 @@ class OperatiiProblemeFile(OperatiiProbleme):
                 problema_citita = str(problema.get_nrlab_nrpb()) + ", " + str(problema.get_descriere()) + ", " + str(problema.get_deadline()) + "\n"
                 f.write(problema_citita)
 
-    def adaugare_problema(self, problema_noua):
+    def adauga_problema(self, problema_noua):
         """
             Adaugam o problema noua
         """
         OperatiiProbleme.adauga_problema(self, problema_noua)
         self.__save_in_file()
 
-    def stergere_problema(self, id):
+    def sterge_problema(self, id):
         """
             Stergem o problema dupa id
         """
         OperatiiProbleme.sterge_problema(self, id)
         self.__save_in_file()
 
-    def modificare_problema(self, id, nume_nou, grup_nou):
+    def modifica_problema(self, id, nume_nou, grup_nou):
         """
             Modificam o problema dupa id
         """
         OperatiiProbleme.modifica_problema(self, id, nume_nou, grup_nou)
         self.__save_in_file()
 
-    def cautare_problema(self, id):
+    def cauta_nrlab_nrpb(self, id):
         """
             Returnam o problema dupa id
         """
         return OperatiiProbleme.cauta_nrlab_nrpb(self, id)
     
-    def returnare_probleme(self):
+    def returneaza_probleme(self):
         """
             Returnam toate problemele
         """

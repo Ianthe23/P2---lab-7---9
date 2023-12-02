@@ -2,10 +2,10 @@ from domain.entitati import note
 from domain.validatori import NotaValidator
 from repository.studenti_repo import OperatiiStudenti
 from repository.probleme_repo import OperatiiProbleme
-from repository.note_repo import OperatiiNote
+from repository.note_repo import OperatiiNoteFile, OperatiiNote
 from service.studenti_srv import StudentService
 
-class NoteService():
+class NoteService:
     def __init__(self, repo, validator, student_srv):
         """
             Initializam clasa

@@ -1,6 +1,7 @@
 from domain.entitati import studenti, probleme, note
 from repository.studenti_repo import OperatiiStudenti
 from repository.probleme_repo import OperatiiProbleme
+import os
 
 def adaugareValida(lista, id1, id2, n):
     if n < 0:
@@ -36,7 +37,7 @@ class OperatiiNote():
         """
         noi_note = []
         for nota in self.__note:
-            if nota.get_id_student() == id1 and nota.get_id_problema() == id2:
+            if int(nota.get_id_student()) == id1 and float(nota.get_id_problema()) == id2:
                 pass
             else:
                 noi_note.append(nota)
@@ -48,7 +49,7 @@ class OperatiiNote():
         """
         noi_note = []
         for nota in self.__note:
-            if nota.get_id_student() == id1 and nota.get_id_problema() == id2:
+            if int(nota.get_id_student()) == id1 and float(nota.get_id_problema()) == id2:
                 nota.set_nota(nota_noua)
             noi_note.append(nota)
         self.__note = noi_note
@@ -61,3 +62,73 @@ class OperatiiNote():
     
     def __eq__(self, other):
         return self.__note == other.__note
+    
+class OperatiiNoteFile(OperatiiNote):
+    
+    def __init__(self, filename):
+        """
+            Initializam repo-ul cu numele fisierului
+        """
+        OperatiiNote.__init__(self)
+        file = os.path.abspath(filename)
+        self.__filename = file
+        self.__load_from_file()
+
+    def __load_from_file(self):
+        """
+            Citim datele din fisier
+        """
+        with open(self.__filename, "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                if line == "\n":
+                    break
+                id_student, id_nrlab_nrpb, nota = [elem.strip() for elem in line.split(", ")]
+                Nota = note(id_student, id_nrlab_nrpb, nota)
+                OperatiiNote.adauga_nota(self, Nota)
+
+    def __save_in_file(self):
+        """
+            Salvam datele in fisier
+        """
+        with open(self.__filename, "w") as f:
+            toate_notele = OperatiiNote.returneaza_note(self)
+            for nota in toate_notele:
+                nota_citita = str(nota.get_id_student()) + ", " + str(nota.get_id_problema()) + ", " + str(nota.get_nota()) + "\n"
+                f.write(nota_citita)
+        
+    def adauga_nota(self, nota_noua):
+        """
+            Adaugam o nota noua
+        """
+        OperatiiNote.adauga_nota(self, nota_noua)
+        self.__save_in_file()
+
+    def sterge_nota(self, id1, id2):
+        """
+            Stergem o nota dupa id student si id problema
+        """
+        OperatiiNote.sterge_nota(self, id1, id2)
+        self.__save_in_file()
+
+    def modifica_nota(self, id1, id2, nota_noua):
+        """
+            Modificam o nota dupa id student si id problema
+        """
+        OperatiiNote.modifica_nota(self, id1, id2, nota_noua)
+        self.__save_in_file()
+    
+    def returneaza_note(self):
+        """
+            Returnam toate notele
+        """
+        return OperatiiNote.returneaza_note(self)
+    
+    def __eq__(self, other):
+        """
+            Suprascrie metoda eq
+        """
+        return OperatiiNote.__eq__(self, other)
+    
+
+

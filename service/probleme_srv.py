@@ -17,14 +17,14 @@ class ProblemaService:
         """
         problema = probleme(nrlab_nrpb, descriere, deadline)
         self.__validator.valideaza_problema(problema)
-        self.__repo.adaugare_problema(problema)
+        self.__repo.adauga_problema(problema)
         return problema
     
     def delete_problema(self, nrlab_nrpb):
         """
             Stergem problema cu nr de lab si nr de pb dat
         """
-        self.__repo.stergere_problema(nrlab_nrpb)
+        self.__repo.sterge_problema(nrlab_nrpb)
 
     def modify_problema(self, nrlab_nrpb, descriere_noua, deadline_nou):
         """
@@ -32,21 +32,21 @@ class ProblemaService:
         """
         problema = probleme(nrlab_nrpb, descriere_noua, deadline_nou)
         self.__validator.valideaza_problema(problema)
-        self.__repo.modificare_problema(nrlab_nrpb, descriere_noua, deadline_nou)
+        self.__repo.modifica_problema(nrlab_nrpb, descriere_noua, deadline_nou)
         return problema
     
     def search_nrlab_nrpb(self, nrlab_nrpb):
         """
             Cautam problema dupa nrlab si nrpb introdus
         """
-        problema = self.__repo.cautare_problema(nrlab_nrpb)
+        problema = self.__repo.cauta_nrlab_nrpb(nrlab_nrpb)
         return problema
     
     def get_probleme(self):
         """
             Returnam lista de probleme
         """
-        return self.__repo.returnare_probleme()
+        return self.__repo.returneaza_probleme()
     
     def add_random_probleme(self, nr):
         """
@@ -55,4 +55,4 @@ class ProblemaService:
         for index in range(nr):
             problema = probleme(uniform(1.0, 10.0), string_generator(11), data_generator())
             self.__validator.valideaza_problema(problema)
-            self.__repo.adaugare_problema(problema)
+            self.__repo.adauga_problema(problema)

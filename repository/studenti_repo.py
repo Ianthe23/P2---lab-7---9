@@ -39,7 +39,7 @@ class OperatiiStudenti:
         """
         noi_studenti = []
         for student in self.__studenti:
-            if student.get_studentID() != id:
+            if int(student.get_studentID()) != id:
                 noi_studenti.append(student)
         self.__studenti = noi_studenti
 
@@ -49,7 +49,7 @@ class OperatiiStudenti:
         """
         noi_studenti = []
         for student in self.__studenti:
-            if student.get_studentID() == id:
+            if int(student.get_studentID()) == id:
                 student.set_nume(nume_nou)
                 student.set_grup(grup_nou)
             noi_studenti.append(student)
@@ -105,34 +105,34 @@ class OperatiiStudentiFile(OperatiiStudenti):
                 student_citit = str(student.get_studentID()) + ", " + str(student.get_nume()) + ", " + str(student.get_grup()) + "\n"
                 f.write(student_citit)
         
-    def adaugare_student(self, student_nou):
+    def adauga_student(self, student_nou):
         """
             Adaugam un student nou
         """
         OperatiiStudenti.adauga_student(self, student_nou)
         self.__save_in_file()
 
-    def stergere_student(self, id):
+    def sterge_student(self, id):
         """
             Stergem un student dupa id
         """
         OperatiiStudenti.sterge_student(self, id)
         self.__save_in_file()
 
-    def modificare_student(self, id, nume_nou, grup_nou):
+    def modifica_student(self, id, nume_nou, grup_nou):
         """
             Modificam un student dupa id
         """
         OperatiiStudenti.modifica_student(self, id, nume_nou, grup_nou)
         self.__save_in_file()
 
-    def cautare_student(self, id):
+    def cauta_ID(self, id):
         """
             Returnam un student dupa id
         """
         return OperatiiStudenti.cauta_ID(self, id)
     
-    def returnare_studenti(self):
+    def returneaza_studenti(self):
         """
             Returnam toti studentii
         """

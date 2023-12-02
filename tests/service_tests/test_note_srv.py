@@ -2,8 +2,8 @@ import unittest
 
 from domain.entitati import note, studenti
 from domain.validatori import NotaValidator, StudentValidator
-from repository.note_repo import OperatiiNote
-from repository.studenti_repo import OperatiiStudenti
+from repository.note_repo import OperatiiNote, OperatiiNoteFile
+from repository.studenti_repo import OperatiiStudenti, OperatiiStudentiFile
 from service.note_srv import NoteService
 from service.studenti_srv import StudentService
 
