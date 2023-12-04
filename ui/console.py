@@ -44,7 +44,7 @@ def printMeniu():
     print("-----------------------------------------------------------")
     print("   I) creeati un raport pentru notele studentilor;")
     print("   J) creeati un raport pentru mediile mai mici decat 5 ale studentilor;")
-    print("   K) creeati un raport cu notele primilor 30% studenti ordonati dupa nota;")
+    print("   K) creeati un raport cu notele primilor 10% studenti ordonati dupa nota;")
     print("   X) iesiti din aplicatie.\n")
 
 
@@ -319,7 +319,7 @@ class console:
                 print(colored("nota:", "red"), end = " ")
                 print(elem[3])
 
-    def __raport_primii_30_studenti(self):
+    def __raport_primii_10_studenti(self):
         """
             Creeam raportul pentru primii 10% studenti ordonati crescator dupa nota si dupa aceea dupa nume
         """
@@ -429,7 +429,7 @@ class console:
                     self.__raport_nota_mai_mica_de_5()
                     
                 elif optiune == 'K':
-                    self.__raport_primii_30_studenti()
+                    self.__raport_primii_10_studenti()
                 else:
                     print("Comanda invalida!\n")
                 

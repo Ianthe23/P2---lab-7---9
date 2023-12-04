@@ -93,7 +93,7 @@ class OperatiiProblemeFile(OperatiiProbleme):
             for line in lines:
                 if line == "\n":
                     break
-                nrlab_nrpb, descriere, deadline = [elem.strip() for elem in line.split(", ")]
+                nrlab_nrpb, descriere, deadline = [elem.strip() for elem in line.split(';')]
                 problema = Probleme(nrlab_nrpb, descriere, deadline)
                 OperatiiProbleme.adauga_problema(self, problema)
 
@@ -104,7 +104,7 @@ class OperatiiProblemeFile(OperatiiProbleme):
         with open(self.__filename, "w") as f:
             toate_problemele = OperatiiProbleme.returneaza_probleme(self)
             for problema in toate_problemele:
-                problema_citita = str(problema.get_nrlab_nrpb()) + ", " + str(problema.get_descriere()) + ", " + str(problema.get_deadline()) + "\n"
+                problema_citita = str(problema.get_nrlab_nrpb()) + ';' + str(problema.get_descriere()) + ';' + str(problema.get_deadline()) + "\n"
                 f.write(problema_citita)
 
     def adauga_problema(self, problema_noua):
