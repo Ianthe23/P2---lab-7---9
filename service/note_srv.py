@@ -4,6 +4,7 @@ from repository.studenti_repo import OperatiiStudenti
 from repository.probleme_repo import OperatiiProbleme
 from repository.note_repo import OperatiiNoteFile, OperatiiNote
 from service.studenti_srv import StudentService
+from utils.functions import quicksort_2, quicksort_1, gnomesort
 
 class NoteService:
     def __init__(self, repo, validator, student_srv):
@@ -47,19 +48,19 @@ class NoteService:
     def raport_crescator_nume(self):
         raport = self.creeare_raport()
     
-        raport_sortat = sorted(raport, key = lambda x: x[1])
+        raport_sortat = quicksort_2(raport, key = lambda x: x[1])
         return raport_sortat
     
     def raport_crescator_nota(self):
         raport = self.creeare_raport()
         
-        raport_sortat = sorted(raport, key = lambda x: x[3])
+        raport_sortat = quicksort_2(raport, key = lambda x: x[3])
         return raport_sortat
     
     def raport_medie_mai_mica_decat_5(self):
         raport = self.creeare_raport()
 
-        raport_sortat = sorted(raport, key = lambda x: x[0])
+        raport_sortat = gnomesort(raport, key = lambda x: x[0])
 
         medie = 0
         index = 0
@@ -87,7 +88,7 @@ class NoteService:
     def raport_primii_10_studenti(self):
         raport = self.creeare_raport()
 
-        raport_sortat = sorted(raport, key = lambda x: (x[3], x[1]))
+        raport_sortat = gnomesort(raport, key = lambda x: (x[3], x[1]))
         return raport_sortat
 
 

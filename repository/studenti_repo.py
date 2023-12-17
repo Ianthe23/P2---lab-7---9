@@ -33,7 +33,7 @@ class OperatiiStudenti:
         else:
             self.__studenti.append(student)
 
-    def sterge_student(self, id):
+    def sterge_student(self, id): # -> O(len(self.__studenti))
         """
             Stergem un student dupa id
         """
